@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Social Strategist AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                black: '#000000',
+                amber: '#FFB300',
+                amberDark: '#FFA000',
+                sky: '#4A90E2',
+                skyLight: '#5DADE2',
+                offWhite: '#F5F5F5',
+                grey: '#757575',
+              }
+            },
+            fontFamily: {
+              sans: ['Outfit', 'sans-serif'],
+              heading: ['Outfit', 'sans-serif'],
+            },
+            keyframes: {
+              'soft-pulse': {
+                '0%, 100%': { transform: 'scale(1)', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' },
+                '50%': { transform: 'scale(1.02)', boxShadow: '0 10px 15px -3px rgba(255, 179, 0, 0.3), 0 4px 6px -4px rgba(255, 179, 0, 0.3)' },
+              },
+              'bounce-slow': {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-3px)' },
+              }
+            },
+            animation: {
+              'soft-pulse': 'soft-pulse 3s ease-in-out infinite',
+              'bounce-slow': 'bounce-slow 2s ease-in-out infinite',
+            }
+          }
+        }
+      }
+    </script>
+    <script>
+      // Production resilience: Bridge various possible API key names from hosting providers
+      const apiKey = window.process?.env?.API_KEY || 
+                     window.process?.env?.GOOGLE_API_KEY || 
+                     window.process?.env?.GEMINI_API_KEY || 
+                     window.process?.env?.VITE_GOOGLE_API_KEY || 
+                     window.process?.env?.VITE_GEMINI_API_KEY ||
+                     "AIzaSyDa2nhNEmSg_ZygAEmHuqEKOGjIITo_IRQ"; // Fallback to provided default
+
+      window.process = {
+        env: {
+          API_KEY: apiKey
+        }
+      };
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0?external=react",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react-dom/client": "https://esm.sh/react-dom@^19.2.3/client",
+    "@google/genai": "https://esm.sh/@google/genai@^1.33.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-brand-offWhite text-brand-black antialiased">
+    <div id="root"></div>
+    <script type="module" src="index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
